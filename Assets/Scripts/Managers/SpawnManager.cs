@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Modularize.
+
 /// <summary>
 /// Manages the instantiation of enemies.
 /// </summary>
