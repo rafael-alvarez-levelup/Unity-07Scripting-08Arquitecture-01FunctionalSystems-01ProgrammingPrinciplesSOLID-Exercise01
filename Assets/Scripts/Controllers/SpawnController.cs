@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: Modularize.
+// TODO: Modularize (SRP).
 
 /// <summary>
 /// Manages the instantiation of enemies.
 /// </summary>
-public class SpawnManager : MonoBehaviour
+public class SpawnController : MonoBehaviour
 {
     #region Private Fields
 

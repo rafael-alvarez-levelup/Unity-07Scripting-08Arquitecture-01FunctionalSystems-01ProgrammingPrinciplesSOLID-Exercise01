@@ -2,6 +2,8 @@
 
 public class DestroyOnCollisionController : MonoBehaviour
 {
+    [SerializeField] private LayerMask destroyMask;
+
     private DestroyBehaviour destroyBehaviour;
 
     private void Awake()
@@ -9,8 +11,14 @@ public class DestroyOnCollisionController : MonoBehaviour
         destroyBehaviour = GetComponent<DestroyBehaviour>();
     }
 
-    private void OnTriggerEnter()
+    private void OnTriggerEnter(Collider other)
     {
-        destroyBehaviour.Destroy();
+        // Destroy game object if other game object is in the assigned destroy layer.
+        if (ContainsLayer(other.gameObject.layer))
+        {
+            destroyBehaviour.Destroy();
+        }
     }
+
+    private bool ContainsLayer(int layer) => destroyMask == (destroyMask | (1 << layer));
 }
