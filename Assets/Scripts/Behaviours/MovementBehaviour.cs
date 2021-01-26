@@ -1,22 +1,20 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class MovementBehaviour : MonoBehaviour
 {
     [SerializeField] private SpeedData speedData;
 
-    public void Move(float x)
+    private Rigidbody myRigidbody;
+
+    private void Awake()
     {
-        Move(x, 0, 0);
+        myRigidbody = GetComponent<Rigidbody>();
     }
 
-    public void Move(float x, float y)
+    public void Move(Vector3 direction)
     {
-        Move(x, y, 0);
-    }
-
-    public void Move(float moveX, float moveY, float moveZ)
-    {
-        Vector3 direction = new Vector3(moveX, moveY, moveZ);
-        transform.Translate(direction * speedData.Speed * Time.deltaTime);
+        // Must handle a null velocity.
+        myRigidbody.velocity = direction * speedData.Speed;
     }
 }

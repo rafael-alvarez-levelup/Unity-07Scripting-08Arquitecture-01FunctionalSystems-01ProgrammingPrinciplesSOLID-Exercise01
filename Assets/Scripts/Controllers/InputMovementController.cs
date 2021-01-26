@@ -4,6 +4,7 @@ public class InputMovementController : MonoBehaviour
 {
     private MovementBehaviour movementBehaviour;
     private EngineBehaviour engineBehaviour;
+    private float horizontalMovement;
 
     private void Awake()
     {
@@ -13,13 +14,14 @@ public class InputMovementController : MonoBehaviour
 
     private void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
+        horizontalMovement = Input.GetAxis("Horizontal");
 
-        if (horizontal != 0)
-        {
-            movementBehaviour.Move(horizontal);
-        }
+        engineBehaviour.Toggle(horizontalMovement != 0);
+    }
 
-        engineBehaviour.Toggle(horizontal != 0);
+    private void FixedUpdate()
+    {
+        // Already handles a null velocity.
+        movementBehaviour.Move(transform.right * horizontalMovement);
     }
 }

@@ -3,14 +3,21 @@
 public class ContinuousMovementController : MonoBehaviour
 {
     private MovementBehaviour movementBehaviour;
+    private EngineBehaviour engineBehaviour;
 
     private void Awake()
     {
         movementBehaviour = GetComponent<MovementBehaviour>();
+        engineBehaviour = GetComponent<EngineBehaviour>();
     }
 
-    private void Update()
+    private void Start()
     {
-        movementBehaviour.Move(0, -1f);
+        engineBehaviour.Toggle(true);
+    }
+
+    private void FixedUpdate()
+    {
+        movementBehaviour.Move(transform.up * -1);
     }
 }
